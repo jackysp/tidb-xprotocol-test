@@ -1,0 +1,20 @@
+{
+  "name": "tidb-xprotocol-test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "NODE_PATH='.' mocha"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@mysql/xdevapi": "^8.0.8",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-spies": "^0.7.1",
+    "lodash.isequal": "^4.5.0",
+    "mocha": "^4.0.1",
+    "p-timeout": "^1.2.0",
+    "proxyquire": "^1.8.0",
+    "testdouble": "^3.2.6"
+  }
+}
