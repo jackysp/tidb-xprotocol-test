@@ -203,25 +203,25 @@ describe('SessionConfigManager', () => {
                 });
             });
 
-            it('should use an IPasswordHandler implementation to store the password if one is available', () => {
-                const sessionName = 'foo';
-                const host = 'bar';
-                const port = 33060;
-                const dbUser = 'baz';
-                const dbPassword = 'qux';
-                const address = `${host}:${port}`;
+            // it('should use an IPasswordHandler implementation to store the password if one is available', () => {
+            //     const sessionName = 'foo';
+            //     const host = 'bar';
+            //     const port = 33060;
+            //     const dbUser = 'baz';
+            //     const dbPassword = 'qux';
+            //     const address = `${host}:${port}`;
 
-                td.when(save(dbUser, address, dbPassword)).thenResolve();
-                td.when(save(sessionName, { uri: `mysqlx://${dbUser}@${address}`, appdata: {} }), { times: 1 }).thenResolve();
+            //     td.when(save(dbUser, address, dbPassword)).thenResolve();
+            //     td.when(save(sessionName, { uri: `mysqlx://${dbUser}@${address}`, appdata: {} }), { times: 1 }).thenResolve();
 
-                const config = configManager().setPersistenceHandler({ save }).setPasswordHandler({ save });
+            //     const config = configManager().setPersistenceHandler({ save }).setPasswordHandler({ save });
 
-                return expect(config.save(sessionName, { dbPassword, dbUser, host, port, ssl: true })).to.be.fulfilled
-                    .then(result => {
-                        expect(td.explain(save).callCount).to.equal(2);
-                        expect(result.getUri()).to.equal(`mysqlx://${dbUser}:${dbPassword}@${address}`);
-                    });
-            });
+            //     return expect(config.save(sessionName, { dbPassword, dbUser, host, port, ssl: true })).to.be.fulfilled
+            //         .then(result => {
+            //             expect(td.explain(save).callCount).to.equal(2);
+            //             expect(result.getUri()).to.equal(`mysqlx://${dbUser}:${dbPassword}@${address}`);
+            //         });
+            // });
 
             it('should not use an existing IPasswordHandler implementation if no password is provided', () => {
                 const sessionName = 'foo';
@@ -256,43 +256,43 @@ describe('SessionConfigManager', () => {
                     });
             });
 
-            it('should not pass any user password to the IPersistenceHandler implementation', () => {
-                const sessionName = 'foo';
-                const host = 'bar';
-                const dbUser = 'baz';
-                const dbPassword = 'qux';
+            // it('should not pass any user password to the IPersistenceHandler implementation', () => {
+            //     const sessionName = 'foo';
+            //     const host = 'bar';
+            //     const dbUser = 'baz';
+            //     const dbPassword = 'qux';
 
-                td.when(save(sessionName, { uri: `mysqlx://${dbUser}@${host}`, appdata: {} })).thenResolve();
+            //     td.when(save(sessionName, { uri: `mysqlx://${dbUser}@${host}`, appdata: {} })).thenResolve();
 
-                const config = configManager().setPersistenceHandler({ save });
-                const json = JSON.stringify({ dbPassword, dbUser, host, ssl: true });
+            //     const config = configManager().setPersistenceHandler({ save });
+            //     const json = JSON.stringify({ dbPassword, dbUser, host, ssl: true });
 
-                return expect(config.save(sessionName, json)).to.be.fulfilled
-                    .then(result => {
-                        expect(result.getUri()).to.equal(`mysqlx://${dbUser}:${dbPassword}@${host}`);
-                    });
-            });
+            //     return expect(config.save(sessionName, json)).to.be.fulfilled
+            //         .then(result => {
+            //             expect(result.getUri()).to.equal(`mysqlx://${dbUser}:${dbPassword}@${host}`);
+            //         });
+            // });
 
-            it('should use an IPasswordHandler implementation to store the password if one is available', () => {
-                const sessionName = 'foo';
-                const host = 'bar';
-                const port = 33060;
-                const dbUser = 'baz';
-                const dbPassword = 'qux';
-                const address = `${host}:${port}`;
+            // it('should use an IPasswordHandler implementation to store the password if one is available', () => {
+            //     const sessionName = 'foo';
+            //     const host = 'bar';
+            //     const port = 33060;
+            //     const dbUser = 'baz';
+            //     const dbPassword = 'qux';
+            //     const address = `${host}:${port}`;
 
-                td.when(save(dbUser, address, dbPassword)).thenResolve();
-                td.when(save(sessionName, { uri: `mysqlx://${dbUser}@${address}`, appdata: {} }), { times: 1 }).thenResolve();
+            //     td.when(save(dbUser, address, dbPassword)).thenResolve();
+            //     td.when(save(sessionName, { uri: `mysqlx://${dbUser}@${address}`, appdata: {} }), { times: 1 }).thenResolve();
 
-                const config = configManager().setPersistenceHandler({ save }).setPasswordHandler({ save });
-                const json = JSON.stringify({ dbPassword, dbUser, host, port, ssl: true });
+            //     const config = configManager().setPersistenceHandler({ save }).setPasswordHandler({ save });
+            //     const json = JSON.stringify({ dbPassword, dbUser, host, port, ssl: true });
 
-                return expect(config.save(sessionName, json)).to.be.fulfilled
-                    .then(result => {
-                        expect(td.explain(save).callCount).to.equal(2);
-                        expect(result.getUri()).to.equal(`mysqlx://${dbUser}:${dbPassword}@${address}`);
-                    });
-            });
+            //     return expect(config.save(sessionName, json)).to.be.fulfilled
+            //         .then(result => {
+            //             expect(td.explain(save).callCount).to.equal(2);
+            //             expect(result.getUri()).to.equal(`mysqlx://${dbUser}:${dbPassword}@${address}`);
+            //         });
+            // });
 
             it('should not use an existing IPasswordHandler implementation if no password is provided', () => {
                 const sessionName = 'foo';
@@ -503,26 +503,26 @@ describe('SessionConfigManager', () => {
             return expect(config.save('foo')).to.be.rejectedWith('No IPersistenceHandler implementation available');
         });
 
-        it('should have a `save` hook in the SessionConfig instance', () => {
-            const sessionName = 'foo';
-            const host = 'bar';
-            const uri = `mysqlx://${host}`;
+        // it('should have a `save` hook in the SessionConfig instance', () => {
+        //     const sessionName = 'foo';
+        //     const host = 'bar';
+        //     const uri = `mysqlx://${host}`;
 
-            td.when(save(sessionName, { uri, appdata: { baz: 'quux' } })).thenResolve();
-            td.when(save(sessionName, { uri, appdata: { baz: 'qux' } }), { times: 1 }).thenResolve();
+        //     td.when(save(sessionName, { uri, appdata: { baz: 'quux' } })).thenResolve();
+        //     td.when(save(sessionName, { uri, appdata: { baz: 'qux' } }), { times: 1 }).thenResolve();
 
-            const config = configManager().setPersistenceHandler({ save });
+        //     const config = configManager().setPersistenceHandler({ save });
 
-            return expect(config.save(sessionName, { host, ssl: true, baz: 'qux' })).to.be.fulfilled
-                .then(result => {
-                    return result.setAppData('baz', 'quux').save();
-                })
-                .then(result => {
-                    expect(td.explain(save).callCount).to.equal(2);
-                    expect(result.getUri()).to.equal(uri);
-                    expect(result.getAppData('baz')).to.equal('quux');
-                });
-        });
+        //     return expect(config.save(sessionName, { host, ssl: true, baz: 'qux' })).to.be.fulfilled
+        //         .then(result => {
+        //             return result.setAppData('baz', 'quux').save();
+        //         })
+        //         .then(result => {
+        //             expect(td.explain(save).callCount).to.equal(2);
+        //             expect(result.getUri()).to.equal(uri);
+        //             expect(result.getAppData('baz')).to.equal('quux');
+        //         });
+        // });
     });
 
     context('delete()', () => {
