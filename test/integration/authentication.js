@@ -47,26 +47,26 @@ describe('@integration authentication methods', () => {
                 });
         });
 
-        it('should select a default authentication method for local UNIX socket connections', function () {
-            if (!config.socket || os.platform() === 'win32') {
-                return this.skip();
-            }
+        //it('should select a default authentication method for local UNIX socket connections', function () {
+        //    if (!config.socket || os.platform() === 'win32') {
+        //        return this.skip();
+        //    }
 
-            const localSocketConfig = Object.assign({}, config, { ssl: false });
+        //    const localSocketConfig = Object.assign({}, config, { ssl: false });
 
-            return expect(mysqlx.getSession(localSocketConfig)).to.be.fulfilled
-                .then(session => {
-                    expect(session.inspect().auth).to.equal('PLAIN');
+        //    return expect(mysqlx.getSession(localSocketConfig)).to.be.fulfilled
+        //        .then(session => {
+        //            expect(session.inspect().auth).to.equal('PLAIN');
 
-                    return session.close();
-                });
-        });
+        //            return session.close();
+        //        });
+        //});
 
-        it('should fail to connect if the authentication method is not supported', () => {
-            const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
+        //it('should fail to connect if the authentication method is not supported', () => {
+        //    const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
 
-            return expect(mysqlx.getSession(invalidConfig)).to.be.rejectedWith('Authentication mechanism is not supported by the server');
-        });
+        //    return expect(mysqlx.getSession(invalidConfig)).to.be.rejectedWith('Authentication mechanism is not supported by the server');
+        //});
     });
 
     context('connection string', () => {
@@ -106,21 +106,21 @@ describe('@integration authentication methods', () => {
                 });
         });
 
-        it('should select a default authentication method for local UNIX socket connections', function () {
-            if (!config.socket || os.platform() === 'win32') {
-                return this.skip();
-            }
+        //it('should select a default authentication method for local UNIX socket connections', function () {
+        //    if (!config.socket || os.platform() === 'win32') {
+        //        return this.skip();
+        //    }
 
-            const localSocketConfig = Object.assign({}, config);
-            const uri = `mysqlx://${localSocketConfig.dbUser}:${localSocketConfig.dbPassword}@(${localSocketConfig.socket})?ssl-mode=DISABLED`;
+        //    const localSocketConfig = Object.assign({}, config);
+        //    const uri = `mysqlx://${localSocketConfig.dbUser}:${localSocketConfig.dbPassword}@(${localSocketConfig.socket})?ssl-mode=DISABLED`;
 
-            return expect(mysqlx.getSession(uri)).to.be.fulfilled
-                .then(session => {
-                    expect(session.inspect().auth).to.equal('PLAIN');
+        //    return expect(mysqlx.getSession(uri)).to.be.fulfilled
+        //        .then(session => {
+        //            expect(session.inspect().auth).to.equal('PLAIN');
 
-                    return session.close();
-                });
-        });
+        //            return session.close();
+        //        });
+        //});
 
         it('should select a default authentication method for insecure failover addresses', () => {
             const failoverConfig = Object.assign({}, config);
@@ -148,11 +148,11 @@ describe('@integration authentication methods', () => {
         //         });
         // });
 
-        it('should fail to connect if the authentication method is not supported', () => {
-            const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
-            const uri = `mysqlx://${invalidConfig.dbUser}:${invalidConfig.dbPassword}@${invalidConfig.host}:${invalidConfig.port}/${invalidConfig.schema}?auth=${invalidConfig.auth}&ssl-mode=DISABLED`;
+        //it('should fail to connect if the authentication method is not supported', () => {
+        //    const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
+        //    const uri = `mysqlx://${invalidConfig.dbUser}:${invalidConfig.dbPassword}@${invalidConfig.host}:${invalidConfig.port}/${invalidConfig.schema}?auth=${invalidConfig.auth}&ssl-mode=DISABLED`;
 
-            return expect(mysqlx.getSession(uri)).to.be.rejectedWith('Authentication mechanism is not supported by the server');
-        });
+        //    return expect(mysqlx.getSession(uri)).to.be.rejectedWith('Authentication mechanism is not supported by the server');
+        //});
     });
 });
