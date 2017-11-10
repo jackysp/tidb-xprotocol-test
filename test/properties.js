@@ -6,7 +6,7 @@ const path = require('path');
 const socketPath = process.env.NODE_TEST_MYSQL_SOCKET;
 const socket = socketPath && socketPath.length ? socketPath : path.join(os.tmpdir(), 'mysqlx.sock');
 const isRemoteServer = process.env.NODE_TEST_MYSQL_LOCATION === 'remote';
-const isSecureServer = process.env.NODE_TEST_MYSQL_SSL !== 'true';
+const isSecureServer = process.env.NODE_TEST_MYSQL_SSL !== 'false';
 
 module.exports = {
     dbPassword: process.env.NODE_TEST_MYSQL_PASSWORD || '',
