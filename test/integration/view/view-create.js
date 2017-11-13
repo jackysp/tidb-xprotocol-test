@@ -36,46 +36,47 @@ describe('@integration view create', () => {
         });
     });
 
-    context('immutable view definitions', () => {
-        let table;
+    // Notice(@jackysp): TiDB does not support view yet.
+    //context('immutable view definitions', () => {
+    //    let table;
 
-        beforeEach('create table', () => {
-            return schema
-                .createTable('test')
-                .addColumn(schema.columnDef('foo', schema.Type.Varchar, 255))
-                .addColumn(schema.columnDef('bar', schema.Type.Int))
-                .execute();
-        });
+    //    beforeEach('create table', () => {
+    //        return schema
+    //            .createTable('test')
+    //            .addColumn(schema.columnDef('foo', schema.Type.Varchar, 255))
+    //            .addColumn(schema.columnDef('bar', schema.Type.Int))
+    //            .execute();
+    //    });
 
-        beforeEach('update context', () => {
-            table = schema.getTable('test');
-        });
+    //    beforeEach('update context', () => {
+    //        table = schema.getTable('test');
+    //    });
 
-        beforeEach('add fixtures', () => {
-            return table
-                .insert(['foo', 'bar'])
-                .values(['value1', 42])
-                .values(['value1', 23])
-                .values(['value2', 23])
-                .execute();
-        });
+    //    beforeEach('add fixtures', () => {
+    //        return table
+    //            .insert(['foo', 'bar'])
+    //            .values(['value1', 42])
+    //            .values(['value1', 23])
+    //            .values(['value2', 23])
+    //            .execute();
+    //    });
 
-        it('should not override', () => {
-            const expected = [['value2', 23], ['value1', 23], ['value1', 42]];
-            const actual = [];
-            const query = table.select('foo', 'bar').orderBy('bar');
-            const view = schema.createView('foobar').definedAs(query);
+    //    it('should not override', () => {
+    //        const expected = [['value2', 23], ['value1', 23], ['value1', 42]];
+    //        const actual = [];
+    //        const query = table.select('foo', 'bar').orderBy('bar');
+    //        const view = schema.createView('foobar').definedAs(query);
 
-            query.limit(2);
+    //        query.limit(2);
 
-            return view
-                .execute(row => actual.push(row))
-                .then(() => {
-                    actual.forEach((row, index) => {
-                        expect(row).to.deep.equal(expected[index]);
-                    });
-                });
-        });
-    });
+    //        return view
+    //            .execute(row => actual.push(row))
+    //            .then(() => {
+    //                actual.forEach((row, index) => {
+    //                    expect(row).to.deep.equal(expected[index]);
+    //                });
+    //            });
+    //    });
+    //});
 });
 
