@@ -48,6 +48,7 @@ describe('@integration document collection add', () => {
                 });
         });
 
+        // TODO(@jackysp): Some bug in TiDB.
         //it('should add documents provided as multiple arguments', () => {
         //    const documents = [{ foo: 'bar' }, { foo: 'baz' }];
         //    let actual = [];

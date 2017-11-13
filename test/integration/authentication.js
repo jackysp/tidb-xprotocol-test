@@ -47,6 +47,7 @@ describe('@integration authentication methods', () => {
                 });
         });
 
+        // Notice(@jackysp): TiDB run tcp or unix socket once a time.
         //it('should select a default authentication method for local UNIX socket connections', function () {
         //    if (!config.socket || os.platform() === 'win32') {
         //        return this.skip();
@@ -62,6 +63,7 @@ describe('@integration authentication methods', () => {
         //        });
         //});
 
+        // TODO(@jackysp): Some bug in TiDB.
         //it('should fail to connect if the authentication method is not supported', () => {
         //    const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
 
@@ -106,6 +108,7 @@ describe('@integration authentication methods', () => {
                 });
         });
 
+        // Notice(@jackysp): TiDB run tcp or unix socket once a time.
         //it('should select a default authentication method for local UNIX socket connections', function () {
         //    if (!config.socket || os.platform() === 'win32') {
         //        return this.skip();
@@ -148,6 +151,7 @@ describe('@integration authentication methods', () => {
         //         });
         // });
 
+        // TODO(@jackysp): Some bug in TiDB.
         //it('should fail to connect if the authentication method is not supported', () => {
         //    const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
         //    const uri = `mysqlx://${invalidConfig.dbUser}:${invalidConfig.dbPassword}@${invalidConfig.host}:${invalidConfig.port}/${invalidConfig.schema}?auth=${invalidConfig.auth}&ssl-mode=DISABLED`;

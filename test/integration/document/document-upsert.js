@@ -170,28 +170,29 @@ describe('@integration single document upsert', () => {
             });
         });
 
-        context('collection with other unique keys', () => {
-            beforeEach('create generated column', () => {
-                return session
-                    .sql(`ALTER TABLE ${schema.getName()}.${collection.getName()} ADD COLUMN name VARCHAR(3) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(doc, '$.name'))) VIRTUAL UNIQUE KEY NOT NULL`)
-                    .execute();
-            });
+        // Notice(@jackysp): TiDB does not support add unique key when alter table add column. Comment this case.
+        //context('collection with other unique keys', () => {
+        //    beforeEach('create generated column', () => {
+        //        return session
+        //            .sql(`ALTER TABLE ${schema.getName()}.${collection.getName()} ADD COLUMN name VARCHAR(3) GENERATED ALWAYS AS (JSON_UNQUOTE(JSON_EXTRACT(doc, '$.name'))) VIRTUAL UNIQUE KEY NOT NULL`)
+        //            .execute();
+        //    });
 
-            it('should fail if the document exists but there is a duplicate unique key', () => {
-                return expect(collection.addOrReplaceOne('1', { _id: '3', name: 'bar' })).to.be.rejected
-                    .then(err => {
-                        expect(err.info).to.include.keys('code');
-                        expect(err.info.code).to.equal(5116);
-                    });
-            });
+        //    it('should fail if the document exists but there is a duplicate unique key', () => {
+        //        return expect(collection.addOrReplaceOne('1', { _id: '3', name: 'bar' })).to.be.rejected
+        //            .then(err => {
+        //                expect(err.info).to.include.keys('code');
+        //                expect(err.info.code).to.equal(5116);
+        //            });
+        //    });
 
-            it.skip('should fail if the document does not exist and there is a duplicate unique key', () => {
-                return expect(collection.addOrReplaceOne('3', { _id: '1', name: 'bar' })).to.be.rejected
-                    .then(err => {
-                        expect(err.info).to.include.keys('code');
-                        expect(err.info.code).to.equal(5116);
-                    });
-            });
-        });
+        //    it.skip('should fail if the document does not exist and there is a duplicate unique key', () => {
+        //        return expect(collection.addOrReplaceOne('3', { _id: '1', name: 'bar' })).to.be.rejected
+        //            .then(err => {
+        //                expect(err.info).to.include.keys('code');
+        //                expect(err.info.code).to.equal(5116);
+        //            });
+        //    });
+        //});
     });
 });
