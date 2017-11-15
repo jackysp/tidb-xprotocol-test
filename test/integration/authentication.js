@@ -63,7 +63,7 @@ describe('@integration authentication methods', () => {
         //        });
         //});
 
-        // TODO(@jackysp): Some bug in TiDB.
+        // Notice(@jackysp): TiDB run tcp or unix socket once a time.
         //it('should fail to connect if the authentication method is not supported', () => {
         //    const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
 
@@ -151,12 +151,11 @@ describe('@integration authentication methods', () => {
         //         });
         // });
 
-        // TODO(@jackysp): Some bug in TiDB.
-        //it('should fail to connect if the authentication method is not supported', () => {
-        //    const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
-        //    const uri = `mysqlx://${invalidConfig.dbUser}:${invalidConfig.dbPassword}@${invalidConfig.host}:${invalidConfig.port}/${invalidConfig.schema}?auth=${invalidConfig.auth}&ssl-mode=DISABLED`;
+        it('should fail to connect if the authentication method is not supported', () => {
+            const invalidConfig = Object.assign({}, config, { auth: 'foobar' });
+            const uri = `mysqlx://${invalidConfig.dbUser}:${invalidConfig.dbPassword}@${invalidConfig.host}:${invalidConfig.port}/${invalidConfig.schema}?auth=${invalidConfig.auth}&ssl-mode=DISABLED`;
 
-        //    return expect(mysqlx.getSession(uri)).to.be.rejectedWith('Authentication mechanism is not supported by the server');
-        //});
+            return expect(mysqlx.getSession(uri)).to.be.rejectedWith('Authentication mechanism is not supported by the server');
+        });
     });
 });

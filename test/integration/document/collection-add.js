@@ -48,20 +48,19 @@ describe('@integration document collection add', () => {
                 });
         });
 
-        // TODO(@jackysp): Some bug in TiDB.
-        //it('should add documents provided as multiple arguments', () => {
-        //    const documents = [{ foo: 'bar' }, { foo: 'baz' }];
-        //    let actual = [];
+        it('should add documents provided as multiple arguments', () => {
+            const documents = [{ foo: 'bar' }, { foo: 'baz' }];
+            let actual = [];
 
-        //    return collection
-        //        .add(documents[0], documents[1])
-        //        .execute()
-        //        .then(() => collection.find().execute(doc => actual.push(doc)))
-        //        .then(() => {
-        //            expect(actual).to.have.lengthOf(documents.length);
-        //            actual.forEach(doc => expect(doc).to.have.all.keys('_id', 'foo'));
-        //        });
-        //});
+            return collection
+                .add(documents[0], documents[1])
+                .execute()
+                .then(() => collection.find().execute(doc => actual.push(doc)))
+                .then(() => {
+                    expect(actual).to.have.lengthOf(documents.length);
+                    actual.forEach(doc => expect(doc).to.have.all.keys('_id', 'foo'));
+                });
+        });
     });
 
     context('with multiple calls', () => {
